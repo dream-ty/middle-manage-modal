@@ -1,0 +1,57 @@
+// 定义的根据类名计算的属性
+$sizes: 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 20, 22, 24,
+  25, 26, 28, 30, 32, 34, 35, 36, 38, 40, 45, 46, 50, 55, 60, 65, 70, 75, 80, 90,
+  100, 120, 150, 180, 200;
+// 使用方式 class="fs-12"
+@each $item in $sizes {
+  .fs-#{$item} {
+    font-size: #{$item}px;
+  }
+  .pl-#{$item} {
+    padding-left: #{$item}px;
+  }
+  .pr-#{$item} {
+    padding-right: #{$item}px;
+  }
+  .pt-#{$item} {
+    padding-top: #{$item}px;
+  }
+  .pb-#{$item} {
+    padding-bottom: #{$item}px;
+  }
+  .ml-#{$item} {
+    margin-left: #{$item}px;
+  }
+  .mr-#{$item} {
+    margin-right: #{$item}px;
+  }
+  .mt-#{$item} {
+    margin-top: #{$item}px;
+  }
+  .mb-#{$item} {
+    margin-bottom: #{$item}px;
+  }
+  .lh-#{$item} {
+    line-height: #{$item}px;
+  }
+  .br-#{$item} {
+    border-radius: #{$item}px;
+  }
+}
+// 浮动
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+// 定位
+.pr {
+  position: relative;
+}
+.pa {
+  position: absolute;
+}
+.pf {
+  position: fixed;
+}
