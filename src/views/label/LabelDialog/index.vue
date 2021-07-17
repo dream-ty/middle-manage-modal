@@ -100,7 +100,6 @@ import api from '@/api/label'
         // 新增提交
         addSubmit(){
             // 
-            console.log(111);
             this.$refs.formData.validate((valid)=>{
                 if(valid) {
                     // 提交数据给后台

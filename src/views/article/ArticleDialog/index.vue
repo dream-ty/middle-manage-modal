@@ -102,7 +102,6 @@ import 'mavon-editor/dist/css/index.css'
        let result= await    api.getArticleById(this.articleId)
 
         this.formData=result.data
-       console.log(result);
         },
             // 关闭对话框
         handleClose(){
