@@ -1,11 +1,11 @@
 import request from '@/utils/request'
-
+import axios from '@/utils/axiosMap'
 export function login(data) {
-  return request({
+  return axios.post({
     url: '/vue-admin-template/user/login',
-    method: 'post',
     data
   })
+  // return axios.post('/vue-admin-template/user/login', data)
 }
 
 export function getInfo(token) {

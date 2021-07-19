@@ -1,3 +1,4 @@
+// 全局前置守卫控制跳转
 import router from './router'
 import store from './store'
 import { Message } from 'element-ui'
@@ -5,8 +6,7 @@ import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
 import { getToken } from '@/utils/auth' // get token from cookie
 import getPageTitle from '@/utils/get-page-title'
-/* Layout */
-import Layout from '@/layout'
+
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
 const whiteList = ['/login'] // no redirect whitelist
@@ -36,52 +36,9 @@ router.beforeEach(async(to, from, next) => {
           console.log('获取角色')
           // get user info
           await store.dispatch('user/getInfo')
-          const addNewRouter = [
-            {
-              path: '/advert',
-              component: Layout,
-              children: [{
-                path: 'index',
-                name: 'Advert',
-                component: () =>
-                  import ('@/views/advert/index'),
-                meta: { title: '广告管理', icon: 'el-icon-bangzhu' }
-              }]
-            },
-
-            {
-              path: '/system',
-              redirect: '/system/user',
-              component: Layout,
-              name: 'System',
-              meta: { title: '系统管理', icon: 'el-icon-s-tools' },
-              children: [{
-                path: 'user',
-                name: 'User',
-                component: () =>
-                  import ('@/views/user/index'),
-                meta: { title: '用户管理', icon: 'el-icon-user' }
-              },
-              {
-                path: 'role',
-                name: 'Role',
-                component: () =>
-                  import ('@/views/role/index'),
-                meta: {
-                  title: '角色管理',
-                  icon: 'el-icon-s-custom'
-                }
-              }, {
-                path: 'menu',
-                name: 'Menu',
-                component: () =>
-                  import ('@/views/menu/index'),
-                meta: { title: '菜单管理', icon: 'el-icon-menu' }
-              }
-              ]
-
-            }
-          ]
+          // 设置后端返回的路由
+          store.commit('SET_ROUTERSDATA')
+          const addNewRouter = store.state.permission.routersData
           router.options.routes = [...router.options.routes, ...addNewRouter]
           router.addRoutes([...addNewRouter]
           )

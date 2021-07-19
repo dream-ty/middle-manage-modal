@@ -57,107 +57,8 @@ export const constantRoutes = [{
     meta: { title: '首页', icon: 'el-icon-s-home', affix: true }
   }]
 },
+{ path: '*', redirect: '/404', hidden: true }
 
-{
-  path: '/blog',
-  component: Layout,
-  redirect: '/blog/article',
-  name: 'Blog',
-  meta: { title: '博客管理', icon: 'el-icon-notebook-2' },
-  children: [{
-    path: 'article',
-    name: 'Article',
-    component: () =>
-      import ('@/views/article/index'),
-    meta: { title: '文章管理', icon: 'el-icon-notebook-2' }
-  },
-  {
-    path: 'category',
-    name: 'Category',
-    component: () =>
-      import ('@/views/category/index'),
-    meta: { title: '分类管理', icon: 'el-icon-s-order' }
-  },
-    {
-      path: 'label',
-      name: 'Label',
-      component: () =>
-        import ('@/views/label/index'),
-      meta: {
-        title: '标签管理',
-        icon: 'el-icon-collection-tag'
-      }
-    }
-  ]
-}
-
-  // {
-  //   path: '/advert',
-  //   component: Layout,
-  //   children: [{
-  //     path: 'index',
-  //     name: 'Advert',
-  //     component: () =>
-  //       import ('@/views/advert/index'),
-  //     meta: { title: '广告管理', icon: 'el-icon-bangzhu' }
-  //   }]
-  // },
-
-  // {
-  //   path: '/system',
-  //   redirect: '/system/user',
-  //   component: Layout,
-  //   name: 'System',
-  //   meta: { title: '系统管理', icon: 'el-icon-s-tools' },
-  //   children: [{
-  //     path: 'user',
-  //     name: 'User',
-  //     component: () =>
-  //       import ('@/views/user/index'),
-  //     meta: { title: '用户管理', icon: 'el-icon-user' }
-  //   },
-  //   {
-  //     path: 'role',
-  //     name: 'Role',
-  //     component: () =>
-  //       import ('@/views/role/index'),
-  //     meta: {
-  //       title: '角色管理',
-  //       icon: 'el-icon-s-custom'
-  //     }
-  //   }, {
-  //     path: 'menu',
-  //     name: 'Menu',
-  //     component: () =>
-  //       import ('@/views/menu/index'),
-  //     meta: { title: '菜单管理', icon: 'el-icon-menu' }
-  //   }
-  //   ]
-
-  // },
-
-  // {
-  //   path: '/vue',
-  //   component: Layout,
-  //   children: [{
-  //     path: 'https://cn.vuejs.org/',
-  //     meta: { title: 'Vue官网', icon: ' el-icon-paperclip' }
-  //   }]
-  // },
-
-  // {
-  //   path: '/redirect',
-  //   component: Layout,
-  //   hidden: true,
-  //   children: [{
-  //     path: '/redirect/:path(.*)',
-  //     component: () =>
-  //       import ('@/views/redirect/index')
-
-//   }]
-// },
-// // 404 page must be placed at the end !!!
-// { path: '*', redirect: '/404', hidden: true }
 ]
 
 const createRouter = () => new Router({
@@ -172,7 +73,7 @@ const router = createRouter()
 export function resetRouter() {
   const newRouter = createRouter()
   router.matcher = newRouter.matcher // reset router
-  router.options = newRouter.options
+  router.options = newRouter.options // 保持初始路由
 }
 // // 解决报错
 // const originalPush = Router.prototype.push

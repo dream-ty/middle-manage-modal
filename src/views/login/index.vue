@@ -3,7 +3,7 @@
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
 
       <div class="title-container">
-        <h3 class="title">Login Form</h3>
+        <h3 class="title">必牛中台交易管理系统</h3>
       </div>
 
       <el-form-item prop="username">
@@ -13,7 +13,7 @@
         <el-input
           ref="username"
           v-model="loginForm.username"
-          placeholder="Username"
+          placeholder="请输入用户名称"
           name="username"
           type="text"
           tabindex="1"
@@ -30,7 +30,7 @@
           ref="password"
           v-model="loginForm.password"
           :type="passwordType"
-          placeholder="Password"
+          placeholder="请输入登录密码"
           name="password"
           tabindex="2"
           auto-complete="on"
@@ -41,11 +41,11 @@
         </span>
       </el-form-item>
 
-      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
+      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">登录</el-button>
 
       <div class="tips">
-        <span style="margin-right:20px;">username: admin</span>
-        <span> password: any</span>
+        <!-- <span style="margin-right:20px;">username: admin</span>
+        <span> password: any</span> -->
       </div>
 
     </el-form>
@@ -54,21 +54,20 @@
 
 <script>
 import { validUsername } from '@/utils/validate'
-import router from '@/router'
 
 export default {
   name: 'Login',
   data() {
     const validateUsername = (rule, value, callback) => {
       if (!validUsername(value)) {
-        callback(new Error('Please enter the correct user name'))
+        callback(new Error('请输入正确的用户名'))
       } else {
         callback()
       }
     }
     const validatePassword = (rule, value, callback) => {
       if (value.length < 6) {
-        callback(new Error('The password can not be less than 6 digits'))
+        callback(new Error('密码不能少于6位'))
       } else {
         callback()
       }
@@ -113,122 +112,6 @@ export default {
           this.$store.dispatch('user/login', this.loginForm).then(() => {
             this.$router.push({ path: this.redirect || '/' })
             this.loading = false
-            const routeradd = [
-      //   {
-      //   path: '/',
-      //   component: Layout,
-      //   redirect: '/dashboard',
-      //   children: [{
-      //     path: 'dashboard',
-      //     name: 'Dashboard',
-      //     component: () =>
-      //       import ('@/views/dashboard/index.vue'),
-      //     meta: { title: '首页', icon: 'el-icon-s-home', affix: true }
-      //   }]
-      // },
-
-      {
-        path: '/blog',
-        component: Layout,
-        redirect: '/blog/article',
-        name: 'Blog',
-        meta: { title: '博客管理', icon: 'el-icon-notebook-2' },
-        children: [{
-          path: 'article',
-          name: 'Article',
-          component: () =>
-            import ('@/views/article/index'),
-          meta: { title: '文章管理', icon: 'el-icon-notebook-2' }
-        },
-        {
-          path: 'category',
-          name: 'Category',
-          component: () =>
-            import ('@/views/category/index'),
-          meta: { title: '分类管理', icon: 'el-icon-s-order' }
-        },
-        {
-          path: 'label',
-          name: 'Label',
-          component: () =>
-            import ('@/views/label/index'),
-          meta: {
-            title: '标签管理',
-            icon: 'el-icon-collection-tag'
-          }
-        }
-        ]
-      },
-
-      {
-        path: '/advert',
-        component: Layout,
-        children: [{
-          path: 'index',
-          name: 'Advert',
-          component: () =>
-            import ('@/views/advert/index'),
-          meta: { title: '广告管理', icon: 'el-icon-bangzhu' }
-        }]
-      },
-
-      {
-        path: '/system',
-        redirect: '/system/user',
-        component: Layout,
-        name: 'System',
-        meta: { title: '系统管理', icon: 'el-icon-s-tools' },
-        children: [{
-          path: 'user',
-          name: 'User',
-          component: () =>
-            import ('@/views/user/index'),
-          meta: { title: '用户管理', icon: 'el-icon-user' }
-        },
-        {
-          path: 'role',
-          name: 'Role',
-          component: () =>
-            import ('@/views/role/index'),
-          meta: {
-            title: '角色管理',
-            icon: 'el-icon-s-custom'
-          }
-        }, {
-          path: 'menu',
-          name: 'Menu',
-          component: () =>
-            import ('@/views/menu/index'),
-          meta: { title: '菜单管理', icon: 'el-icon-menu' }
-        }
-        ]
-
-      },
-
-      {
-        path: '/vue',
-        component: Layout,
-        children: [{
-          path: 'https://cn.vuejs.org/',
-          meta: { title: 'Vue官网', icon: ' el-icon-paperclip' }
-        }]
-      },
-
-      {
-        path: '/redirect',
-        component: Layout,
-        hidden: true,
-        children: [{
-          path: '/redirect/:path(.*)',
-          component: () =>
-            import ('@/views/redirect/index')
-
-        }]
-      },
-      // 404 page must be placed at the end !!!
-      { path: '*', redirect: '/404', hidden: true }]
-      
-      router.addRoutes(routeradd)
           }).catch(() => {
             this.loading = false
           })
