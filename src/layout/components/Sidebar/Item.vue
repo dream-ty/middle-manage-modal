@@ -25,7 +25,7 @@ export default {
     }
 
     if (title) {
-      vnodes.push(<span >{(title)}</span>)
+      vnodes.push(<span slot='title' >{(title)}</span>)
     }
     return vnodes
   }
